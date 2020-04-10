@@ -1,0 +1,4 @@
+node_modules/
+public/ckeditor.js
+public/ckeditor.js.map
+public/translations
