@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>CKEditor 5 – inline editor build – development sample</title>
 	<style>
-body {
+		body {
 			max-width: 800px;
 			margin: 20px auto;
 		}
@@ -26,6 +26,9 @@ body {
 	InlineEditor.create( document.querySelector( '#editor' ) )
 		.then( editor => {
 			window.editor = editor;
+
+			var wc = editor.plugins.get( 'WordCount' )
+			document.body.appendChild( wc.wordCountContainer )
 		} )
 		.catch( error => {
 			console.error( 'There was a problem initializing the editor.', error );

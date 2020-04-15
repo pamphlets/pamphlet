@@ -30,5 +30,8 @@
     "webpack-cli": "^3.3.6"
   },
   "author": "CKSource (http://cksource.com/)",
-  "license": "GPL-2.0-or-later"
+  "license": "GPL-2.0-or-later",
+  "dependencies": {
+    "@ckeditor/ckeditor5-word-count": "^18.0.0"
+  }
 }
