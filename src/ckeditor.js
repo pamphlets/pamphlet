@@ -10,8 +10,10 @@ import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
+import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
+import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
 import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading';
 import Image from '@ckeditor/ckeditor5-image/src/image';
@@ -37,8 +39,10 @@ InlineEditor.builtinPlugins = [
 	Base64UploadAdapter,
 	Autoformat,
 	Bold,
+	Code,
 	Italic,
 	BlockQuote,
+	CodeBlock,
 	EasyImage,
 	Heading,
 	Image,
@@ -66,6 +70,8 @@ InlineEditor.defaultConfig = {
 			'bold',
 			'italic',
 			'link',
+			'code',
+			'codeBlock',
 			'bulletedList',
 			'numberedList',
 			'|',
