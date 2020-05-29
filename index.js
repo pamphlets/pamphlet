@@ -9,7 +9,7 @@ var { keymap } = require('prosemirror-keymap')
 var { schema, defaultMarkdownParser, defaultMarkdownSerializer } = require('prosemirror-markdown')
 var { toggleLink } = require('./lib/toggle-link')
 
-class DraftEditor {
+class Pamphlet {
   constructor (container, content = '') {
     this.container = container
     this.view = this.createView(content)
@@ -52,4 +52,4 @@ class DraftEditor {
   }
 }
 
-module.exports = DraftEditor
+module.exports = Pamphlet

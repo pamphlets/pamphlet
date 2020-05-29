@@ -1,9 +1,15 @@
 {
+  "name": "pamphlet",
+  "description": "Write faster without distractions",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
   "scripts": {
-    "build:debug": "browserify --debug index.js -s DraftEditor -o dist/draft-editor.debug.js",
-    "build:min": "browserify -p tinyify index.js -s DraftEditor -o dist/draft-editor.min.js",
-    "install": "npm run build:debug && npm run build:min",
-    "prepare": "npm install && npm test",
+    "build:debug": "browserify --debug index.js -s Pamphlet -o dist/pamphlet.debug.js",
+    "build:min": "browserify -p tinyify index.js -s Pamphlet -o dist/pamphlet.min.js",
+    "prepare": "npm test && npm run build:debug && npm run build:min",
     "test": "standard && dependency-check --no-dev index.js"
   },
   "dependencies": {
@@ -22,5 +28,23 @@
     "dependency-check": "^4.1.0",
     "standard": "^14.3.4",
     "tinyify": "^2.5.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pamphlets/pamphlet.git"
+  },
+  "keywords": [
+    "editor",
+    "prosemirror",
+    "markdown",
+    "fast",
+    "focus",
+    "distraction"
+  ],
+  "author": "Brecht Savelkoul <brecht.savelkoul@alumni.lse.ac.uk>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/pamphlets/pamphlet/issues"
+  },
+  "homepage": "https://github.com/pamphlets/pamphlet#readme"
 }

@@ -3,15 +3,15 @@
   <head>
     <meta charset="utf8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Draft Editor</title>
+    <title>Pamphlet</title>
   </head>
   <body>
-    <script src="/dist/draft-editor.debug.js"></script>
+    <script src="/dist/pamphlet.debug.js"></script>
     <script>
       fetch('/README.md').then(res => {
         return res.text()
       }).then(readme => {
-        window.editor = new DraftEditor(document.body, readme)
+        window.editor = new Pamphlet(document.body, readme)
       }).catch(console.error)
     </script>
   </body>
