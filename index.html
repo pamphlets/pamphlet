@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Draft Editor</title>
+  </head>
+  <body>
+    <script src="/dist/draft-editor.debug.js"></script>
+    <script>
+      fetch('/README.md').then(res => {
+        return res.text()
+      }).then(readme => {
+        window.editor = new DraftEditor(document.body, readme)
+      }).catch(console.error)
+    </script>
+  </body>
+</html>

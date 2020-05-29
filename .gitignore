@@ -1,4 +1,2 @@
-node_modules/
-public/ckeditor.js
-public/ckeditor.js.map
-public/translations
+dist
+node_modules
