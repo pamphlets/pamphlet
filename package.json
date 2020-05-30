@@ -1,15 +1,13 @@
 {
   "name": "pamphlet",
   "description": "Write faster without distractions",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "main": "index.js",
   "directories": {
+    "dist": "dist",
     "lib": "lib"
   },
   "scripts": {
-    "build:debug": "browserify --debug index.js -s Pamphlet -o dist/pamphlet.debug.js",
-    "build:min": "browserify -p tinyify index.js -s Pamphlet -o dist/pamphlet.min.js",
-    "prepare": "npm test && npm run build:debug && npm run build:min",
     "test": "standard && dependency-check --no-dev index.js"
   },
   "dependencies": {
