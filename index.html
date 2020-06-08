@@ -1,18 +1,133 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pamphlet</title>
+    <title>Draft</title>
+    
+    <style>
+      body {
+        margin: 0 auto;
+        max-width: 49em;
+        padding: 1em;
+      }
+      
+      nav {
+        display: flex;
+        margin-block-end: 1em;
+        max-width: 100%;
+      }
+      nav > * + * {
+        margin-inline-start: 3px;
+      }
+      nav > input {
+        flex: 1;
+      }
+
+      .ProseMirror {
+        border: 1px solid lightgrey;
+        border-radius: 3px;
+        box-sizing: border-box;
+        min-height: 50vh;
+        outline: none;
+        padding: 0 .5em;
+        white-space: pre-wrap;
+      }
+      .ProseMirror-focused {
+        border-color: black;
+      }
+    </style>
+    <script src="/dist/pamphlet.debug.js"></script>
   </head>
   <body>
-    <script src="/dist/pamphlet.debug.js"></script>
+    <nav>
+      <input id="drive" type="text" placeholder="hyper://<drive>" readonly>
+      <input id="path" type="text" placeholder="/path" readonly>
+
+      <button is="open-button">Open</button>
+      <button is="save-button" mode="current">Save</button>
+      <button is="save-button" mode="as">Save as</button>
+    </nav>
+
+    <main id="container">
+      <!-- ProseMirror inserted here -->
+    </main>
+
     <script>
-      fetch('/README.md').then(res => {
-        return res.text()
-      }).then(readme => {
-        window.editor = new Pamphlet(document.body, readme)
-      }).catch(console.error)
+      initEditor()
+
+      window.addEventListener('keypress', async event => {
+        if (event.ctrlKey && event.keyCode) {
+          saveFile(window.file)
+        }
+      })
+      
+      customElements.define('open-button', class extends HTMLButtonElement {
+        connectedCallback () {
+          this.addEventListener('click', openFile)
+        }
+      }, { extends: 'button'})
+
+      customElements.define('save-button', class extends HTMLButtonElement {
+        connectedCallback () {
+          this.mode = this.getAttribute('mode')
+          this.addEventListener('click', () => {
+            switch (this.mode) {
+              case 'as':
+                return saveFile(null)
+              case 'current':
+                return saveFile(window.file)
+              default: 
+                throw new Error('Unknown save mode: ' + mode)
+            }
+          })
+        }
+      }, { extends: 'button' })
+
+      //=====
+
+      async function initEditor () {
+        if (sessionStorage.file) {
+          window.file = JSON.parse(sessionStorage.file)
+          window.editor = new Pamphlet(window.container, await beaker.hyperdrive.readFile(window.file.url))
+          await updateLocation(file)
+        } else {
+          var readme = await fetch('/README.md')
+          window.editor = new Pamphlet(window.container, await readme.text())
+        }
+      }
+
+      async function openFile () {
+        var file = (await beaker.shell.selectFileDialog())[0]
+        window.editor.content = await beaker.hyperdrive.readFile(file.url)
+        await updateLocation(file)
+      }
+
+      async function saveFile (file) {
+        toggleSaveButtons()
+        file = file || await beaker.shell.saveFileDialog()
+        await beaker.hyperdrive.writeFile(file.url, window.editor.content)
+        await updateLocation(file)
+        setTimeout(toggleSaveButtons, 250)
+      }
+
+      async function updateLocation (file) {
+        window.file = file
+        sessionStorage.file = JSON.stringify(file)
+
+        var drive = await beaker.hyperdrive.getInfo(file.origin)
+        window.drive.value = drive.title
+        window.path.value = file.path
+      }
+
+      function toggleSaveButtons () {
+        var sel = 'button[is=save-button]'
+
+        for (var btn of document.querySelectorAll(sel)) {
+          btn.toggleAttribute('disabled')
+        }
+      }
+
     </script>
   </body>
 </html>
