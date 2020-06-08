@@ -6,8 +6,8 @@ publish: all
 	@npm test
 	@npm publish
 
-dist/pamphlet.js: lib/pamphlet.js node_modules rollup.config.js
-	@./node_modules/.bin/rollup -i $< -f cjs -o $@ -c
+dist/pamphlet.js: lib/pamphlet.js node_modules
+	@./node_modules/.bin/rollup -i $< -f cjs -o $@
 
 dist/pamphlet.esm.js: lib/pamphlet.js node_modules rollup.config.js
 	@./node_modules/.bin/rollup -i $< -f es -o $@ -c
