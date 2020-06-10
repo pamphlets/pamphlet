@@ -4,9 +4,9 @@ import { baseKeymap } from 'prosemirror-commands'
 import { buildInputRules, buildKeymap } from 'prosemirror-example-setup'
 import { buildMarkdownRules } from './rules'
 import { dropCursor } from 'prosemirror-dropcursor'
+import { formatCurrentNode, removeNodeFormatting } from './commands'
 import { history } from 'prosemirror-history'
 import { keymap } from 'prosemirror-keymap'
-import { markupSelection, turndownSelection } from './commands'
 import { schema, defaultMarkdownParser, defaultMarkdownSerializer } from 'prosemirror-markdown'
 
 export default class Pamphlet {
@@ -26,7 +26,7 @@ export default class Pamphlet {
         buildMarkdownRules(),
         history(),
         keymap(buildKeymap(schema)),
-        keymap({ 'Alt-h': markupSelection, 'Alt-m': turndownSelection }),
+        keymap({ 'Alt-f': formatCurrentNode, 'Alt-r': removeNodeFormatting }),
         keymap(baseKeymap),
         dropCursor()
       ]

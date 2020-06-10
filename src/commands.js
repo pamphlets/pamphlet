@@ -1,7 +1,7 @@
 import { NodeSelection } from 'prosemirror-state'
 import { schema, defaultMarkdownParser, defaultMarkdownSerializer } from 'prosemirror-markdown'
 
-export function markupSelection (state, dispatch) {
+export function formatCurrentNode (state, dispatch) {
   if (!state.selection.empty) return false
   if (dispatch) {
     var tr = selectParentNode(state)
@@ -12,7 +12,7 @@ export function markupSelection (state, dispatch) {
   return true
 }
 
-export function turndownSelection (state, dispatch) {
+export function removeNodeFormatting (state, dispatch) {
   if (!state.selection.empty) return false
   if (dispatch) {
     var tr = selectParentNode(state)
