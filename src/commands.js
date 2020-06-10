@@ -1,13 +1,17 @@
-import { NodeSelection } from 'prosemirror-state'
+import { NodeSelection, TextSelection } from 'prosemirror-state'
 import { schema, defaultMarkdownParser, defaultMarkdownSerializer } from 'prosemirror-markdown'
 
 export function formatCurrentNode (state, dispatch) {
   if (!state.selection.empty) return false
   if (dispatch) {
+    var pos = getNodeStartPosition(state.selection)
     var tr = selectParentNode(state)
     var markdown = serializeSlice(tr.selection.content())
     var node = defaultMarkdownParser.parse(markdown)
-    dispatch(tr.replaceSelectionWith(node))
+
+    tr = tr.replaceSelectionWith(node)
+    tr = tr.setSelection(TextSelection.create(tr.doc, pos))
+    dispatch(tr)
   }
   return true
 }
@@ -15,12 +19,20 @@ export function formatCurrentNode (state, dispatch) {
 export function removeNodeFormatting (state, dispatch) {
   if (!state.selection.empty) return false
   if (dispatch) {
+    var pos = getNodeStartPosition(state.selection)
     var tr = selectParentNode(state)
     var markdown = serializeSlice(tr.selection.content())
     var node = schema.text(markdown)
-    dispatch(tr.replaceSelectionWith(node, false))
+
+    tr = tr.replaceSelectionWith(node, false)
+    tr = tr.setSelection(TextSelection.create(tr.doc, pos))
+    dispatch(tr)
   }
   return true
+}
+
+function getNodeStartPosition ({ $anchor }) {
+  return $anchor.pos - $anchor.parentOffset
 }
 
 function selectParentNode (state) {
