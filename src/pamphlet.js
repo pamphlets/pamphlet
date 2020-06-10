@@ -16,7 +16,6 @@ export default class Pamphlet {
     this.view = this.createView()
   }
 
-
   createState (content) {
     return EditorState.create({
       schema,

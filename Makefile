@@ -1,11 +1,11 @@
-.PHONY: all publish
+.PHONY: all package
 
 BIN := ./node_modules/.bin/
 DEPS := src/pamphlet.js $(wildcard src/*) node_modules
 
 all: dist/pamphlet.js dist/esm/pamphlet.min.js dist/esm/pamphlet.js dist/umd/pamphlet.min.js dist/umd/pamphlet.js
 
-publish: all
+package: all
 	@npm test
 	@npm publish
 

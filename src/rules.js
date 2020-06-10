@@ -7,7 +7,7 @@ export function buildMarkdownRules () {
   rules.push(markInputRule(/(?:^|[^\*_])(?:\*|_)([^\*_]+)(?:\*|_)$/, schema.marks.em)) // eslint-disable-line
   rules.push(markInputRule(/(?:`)([^`]+)(?:`)$/, schema.marks.code)) // eslint-disable-line
   rules.push(markInputRule(/\[([^\]]+)\]\(([^\)]+)\)$/, schema.marks.link, match => ({ href: match[2] }))) // eslint-disable-line
-  rules.push(markInputRule(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/, schema.marks.link, match => ({ href: match[0] })))
+  rules.push(markInputRule(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/, schema.marks.link, match => ({ href: match[0] }))) // eslint-disable-line
   return inputRules({ rules })
 }
 
