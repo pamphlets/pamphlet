@@ -13,13 +13,13 @@ $ npm install pamphlet
 You can also use a good old script tag:
 
 ```html
-<script src="https://unpkg.com/pamphlet@2.x/dist/pamphlet.umd.js"></script>
+<script src="https://unpkg.com/pamphlet@3.x/dist/umd/pamphlet.js"></script>
 ```
 
 Or a fancy new module import:
 
 ```js
-import Pamphlet from 'https://unpkg.com/pamphlet@2.x/dist/pamphlet.esm.js'
+import Pamphlet from 'https://unpkg.com/pamphlet@3.x/dist/esm/pamphlet.js'
 ```
 
 ## Use

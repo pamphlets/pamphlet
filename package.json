@@ -26,7 +26,8 @@
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^8.0.1",
     "rollup": "^2.15.0",
-    "standard": "^14.3.4"
+    "standard": "^14.3.4",
+    "terser": "^4.7.0"
   },
   "repository": {
     "type": "git",
