@@ -1,6 +1,6 @@
 .PHONY: all publish
 
-DEPS := lib/pamphlet.js $(wildcard lib/*) node_modules
+DEPS := src/pamphlet.js $(wildcard src/*) node_modules
 
 all: dist/pamphlet.js dist/pamphlet.esm.js dist/pamphlet.umd.js
 
