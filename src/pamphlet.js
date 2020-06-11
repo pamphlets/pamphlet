@@ -9,9 +9,27 @@ import { history } from 'prosemirror-history'
 import { keymap } from 'prosemirror-keymap'
 import { schema, defaultMarkdownParser, defaultMarkdownSerializer } from 'prosemirror-markdown'
 
+var corePlugins = [
+  buildInputRules(schema),
+  buildMarkdownRules(),
+  history(),
+  keymap(buildKeymap(schema)),
+  keymap({ 'Alt-f': formatCurrentNode, 'Alt-r': removeNodeFormatting }),
+  keymap(baseKeymap),
+  dropCursor()
+]
+
 export default class Pamphlet {
-  constructor (container, content = '') {
+  constructor (container, content = '', opts = {}) {
+    if (typeof content === 'object') {
+      opts = content
+      content = ''
+    }
+
+    opts.plugins = opts.plugins || []
+
     this.container = container
+    this.plugins = opts.plugins.concat(corePlugins)
     this.state = this.createState(content)
     this.view = this.createView()
   }
@@ -20,15 +38,7 @@ export default class Pamphlet {
     return EditorState.create({
       schema,
       doc: this.parse(content),
-      plugins: [
-        buildInputRules(schema),
-        buildMarkdownRules(),
-        history(),
-        keymap(buildKeymap(schema)),
-        keymap({ 'Alt-f': formatCurrentNode, 'Alt-r': removeNodeFormatting }),
-        keymap(baseKeymap),
-        dropCursor()
-      ]
+      plugins: this.plugins
     })
   }
 
