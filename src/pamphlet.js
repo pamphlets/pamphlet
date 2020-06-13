@@ -43,7 +43,22 @@ export default class Pamphlet {
   }
 
   createView () {
-    return new EditorView(this.container, { state: this.state })
+    return new EditorView(this.container, {
+      state: this.state,
+      dispatchTransaction: tr => {
+        this.state = this.state.apply(tr)
+        this.view.updateState(this.state)
+        this.toggleEmpty()
+      }
+    })
+  }
+
+  toggleEmpty () {
+    if (this.empty) {
+      this.view.dom.classList.add('ProseMirror-empty')
+    } else {
+      this.view.dom.classList.remove('ProseMirror-empty')
+    }
   }
 
   parse (content) {
@@ -63,5 +78,11 @@ export default class Pamphlet {
 
     this.state = this.createState(content)
     this.view = this.createView()
+  }
+
+  get empty () {
+    return this.state.doc.childCount === 1 &&
+      this.state.doc.firstChild.isTextblock &&
+      this.state.doc.firstChild.content.size === 0
   }
 }
