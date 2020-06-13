@@ -1,4 +1,4 @@
-import { EditorState } from 'prosemirror-state'
+import { EditorState, AllSelection } from 'prosemirror-state'
 import { EditorView } from 'prosemirror-view'
 import { baseKeymap } from 'prosemirror-commands'
 import { buildInputRules, buildKeymap } from 'prosemirror-example-setup'
@@ -74,10 +74,11 @@ export default class Pamphlet {
   }
 
   set content (content) {
-    this.view.destroy()
-
-    this.state = this.createState(content)
-    this.view = this.createView()
+    var select = new AllSelection(this.state.doc)
+    var tr = this.state.tr
+    tr = tr.setSelection(select)
+    tr = tr.replaceSelectionWith(this.parse(content))
+    this.view.dispatch(tr)
   }
 
   get empty () {
