@@ -1,7 +1,7 @@
 {
   "name": "pamphlet",
   "description": "Write faster without distractions",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "main": "dist/pamphlet.js",
   "directories": {
     "dist": "dist",
@@ -19,7 +19,8 @@
     "prosemirror-keymap": "^1.1.4",
     "prosemirror-markdown": "^1.4.5",
     "prosemirror-state": "^1.3.3",
-    "prosemirror-view": "^1.14.11"
+    "prosemirror-view": "^1.14.11",
+    "wordcount": "^1.1.1"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^13.0.0",

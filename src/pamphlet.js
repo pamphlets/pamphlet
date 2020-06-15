@@ -8,6 +8,7 @@ import { formatCurrentNode, removeNodeFormatting } from './commands'
 import { history } from 'prosemirror-history'
 import { keymap } from 'prosemirror-keymap'
 import { schema, defaultMarkdownParser, defaultMarkdownSerializer } from 'prosemirror-markdown'
+import wordcount from 'wordcount'
 
 var corePlugins = [
   buildInputRules(schema),
@@ -61,6 +62,16 @@ export default class Pamphlet {
     }
   }
 
+  count () {
+    var txt = this.selection.anchor === this.selection.head
+      ? this.view.dom.innerText
+      : window.getSelection().toString()
+
+    var words = wordcount(txt)
+    var chars = words !== 0 ? txt.length : 0
+    return { chars, words }
+  }
+
   parse (content) {
     return defaultMarkdownParser.parse(content)
   }
@@ -85,5 +96,9 @@ export default class Pamphlet {
     return this.state.doc.childCount === 1 &&
       this.state.doc.firstChild.isTextblock &&
       this.state.doc.firstChild.content.size === 0
+  }
+
+  get selection () {
+    return this.state.selection
   }
 }
