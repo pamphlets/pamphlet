@@ -40,7 +40,7 @@ Pamphlet aims to provide a fast and focused writing experience. To achieve this 
 
 Because Pamphlet ships without its own UI, it will also fit right into any existing design. No fiddling with custom CSS, no compatibility issues. Do give it a try!
 
-## Acknowledgements
+## Credit
 
 Pamphlet is built using [ProseMirror](https://prosemirror.net), an amazing text editing toolset that does all the heavy lifting under the hood!
 
