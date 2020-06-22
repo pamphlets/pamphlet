@@ -2,7 +2,7 @@
   "name": "pamphlet",
   "description": "Write faster without distractions",
   "version": "3.3.1",
-  "main": "dist/pamphlet.js",
+  "main": "lib/pamphlet.js",
   "directories": {
     "dist": "dist",
     "lib": "lib"
@@ -23,10 +23,7 @@
     "wordcount": "^1.1.1"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^13.0.0",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^8.0.1",
-    "rollup": "^2.15.0",
+    "fastroll": "^1.0.1",
     "standard": "^14.3.4",
     "terser": "^4.7.0"
   },
