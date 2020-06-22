@@ -1,7 +1,7 @@
 {
   "name": "pamphlet",
   "description": "Write faster without distractions",
-  "version": "3.3.1",
+  "version": "4.0.0",
   "main": "lib/pamphlet.js",
   "directories": {
     "dist": "dist",
