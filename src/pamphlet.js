@@ -33,6 +33,7 @@ export default class Pamphlet {
     this.plugins = opts.plugins.concat(corePlugins)
     this.state = this.createState(content)
     this.view = this.createView()
+    this.toggleEmpty()
   }
 
   createState (content) {
